@@ -162,6 +162,7 @@ uci commit
 
 uci set upnpd.config.enable_natpmp='0'
 uci set upnpd.config.enable_upnp='0'
+uci set minitr064d.config.enable_upnp='0'
 uci commit
 /etc/init.d/minitr064d stop
 /etc/init.d/minitr064d disable
