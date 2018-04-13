@@ -232,6 +232,12 @@ need this but I'll consider formalising it later.  Edit this file:
 
 and resart Nginx.
 
+### IPoE
+
+There are various settings for IPoE within uci's settings (eg `uci show`).
+Evidence online says that IPoE is possible with this modem and may
+
+
 ## Credit and thanks
 
 The root method is care of Mark Smith
@@ -240,6 +246,12 @@ The root method is care of Mark Smith
 The basis for the tweak instructions come from Mark Smith and also from
 Steve's blog at
 <https://www.crc.id.au/hacking-the-technicolor-tg799vac-and-unlocking-features/>.
+
+## Contributing
+
+Pull requests are welcome for adding features or fixing bugs.  Open an issue
+to discuss improving the default choices.  Note this is not a support forum so
+any questions or requests for help will be closed.
 
 ## Licence
 
