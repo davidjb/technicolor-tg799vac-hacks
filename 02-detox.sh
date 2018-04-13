@@ -127,12 +127,17 @@ uci commit
 # data and posting it back to Telstra and Technicolor. No way is this sort of
 # backdoor okay.
 #
+# From http://www.technicolor.com/en/who-we-are/press-news-center/news/telstra-launches-largest-deployment-wireless-doctor:
+#
+#  Wireless Doctor makes possible active radio resource management; perfect
+#  call center visibility; self-installation of Wi-Fi extenders; targeted Wi-Fi
+#  extender CAPEX strategies; and active client steering.
+#
 # Original settings:
 # wifi_doctor_agent.config.cs_url='https://coll-v2-ap.wifi-doctor.org/'
 # wifi_doctor_agent.as_config.url='https://device-auth-ap.wifi-doctor.org/oauth/token'
 #
 # Ref: self-investigation / https://forums.whirlpool.net.au/archive/2703814
-#      http://www.technicolor.com/en/who-we-are/press-news-center/news/telstra-launches-largest-deployment-wireless-doctor
 ###########################
 
 uci set wifi_doctor_agent.config.enabled=0
