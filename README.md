@@ -198,6 +198,13 @@ don't persist.
 
 From <http://whrl.pl/Re6mCZ>.
 
+### Bridging
+
+    brctl help
+    brctl show
+
+Shows the current status of the bridge on the modem.
+
 ### Telnet fallback
 
 OpenWRT has a telnet fallback if your system is configured accordingly and
