@@ -14,6 +14,15 @@ will work for you.  Test careful and be prepared.
 
 ## How to
 
+If your modem happens to be running a newer firmware version (such as an
+Over-The-Air [OTA] upgrade that happened) or you happen to get locked out for
+any reason, try a factory reset with the modem physically disconnected from
+the Internet.
+
+To factory reset, get a paperclip and hold down the reset button for 15
+seconds.  Release the button and wait a few moments -- the modem will restore,
+all the LEDs will flash and the modem will reset.
+
 ### Setup
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
