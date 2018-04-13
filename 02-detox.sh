@@ -122,9 +122,22 @@ uci commit
 
 ###########################
 # Disable Wifi Doctor Agent
+#
+# No idea on specifics, but this is spyware that's hoovering up your wifi
+# data and posting it back to Telstra and Technicolor. No way is this sort of
+# backdoor okay.
+#
+# Original settings:
+# wifi_doctor_agent.config.cs_url='https://coll-v2-ap.wifi-doctor.org/'
+# wifi_doctor_agent.as_config.url='https://device-auth-ap.wifi-doctor.org/oauth/token'
+#
+# Ref: self-investigation / https://forums.whirlpool.net.au/archive/2703814
+#      http://www.technicolor.com/en/who-we-are/press-news-center/news/telstra-launches-largest-deployment-wireless-doctor
 ###########################
 
 uci set wifi_doctor_agent.config.enabled=0
+uci set wifi_doctor_agent.config.cs_url='http://localhost'
+uci set wifi_doctor_agent.as_config.url='http://locahost'
 uci commit
 /etc/init.d/wifi-doctor-agent stop
 /etc/init.d/wifi-doctor-agent disable
