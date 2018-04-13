@@ -93,10 +93,10 @@ uci commit
 cat > /usr/sbin/toggleleds.sh << EOF
 #!/bin/sh
 
-status=\$(cat /sys/class/leds/power:red/brightness)
+ledfw_status=\$(pidof ledfw.lua)
 
-# Currently on
-if [ "\$status" -eq 255 ] || [ "\$status" -eq 1 ]; then
+# If currently on
+if [ -n "\$ledfw_status" ]; then
   /etc/init.d/ledfw stop
   for led in /sys/class/leds/*; do
     echo '0' > "\$led/brightness"
@@ -104,10 +104,19 @@ if [ "\$status" -eq 255 ] || [ "\$status" -eq 1 ]; then
   done
 else
   /etc/init.d/ledfw start
-  for led in /sys/class/leds/power:red; do
-    echo '255' > "\$led/brightness"
-    echo 'default-on' > "\$led/trigger"
-  done
+
+  # Wifi LEDs don't come back on til you restart hostapd
+  hostapd_status=\$(pidof hostapd)
+  if [ -n "\$hostapd_status" ]; then
+    /etc/init.d/hostapd restart
+  fi
+
+  sleep 2
+
+  # Blue power light
+  led="/sys/class/leds/power"
+  echo '0' > "\$led:red/brightness"
+  echo '255' > "\$led:blue/brightness"
 fi
 EOF
 chmod +x /usr/sbin/toggleleds.sh
