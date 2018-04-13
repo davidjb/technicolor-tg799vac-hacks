@@ -149,17 +149,32 @@ At this point, the modem is back running `17.2` and SSH is available on port
 
 ## Notes
 
+### Introspection
+
+To further investigate what's *actually* going on in this modem, the following
+are helpful:
+
+* `ps` command - shows everything that's running
+* `netstat -lenp` command - shows everything that's listening on sockets (TCP,
+  UPD, Unix etc)
+* `uci show` command - dumps the entire OpenWRT configuration for you to look
+  at
+* `logread -f` command - access logs for most services (which use `syslog`.
+  Pass an argument of `-e nginx` to match log entries just related to Nginx,
+  which is perfect for debugging errors in the web UI.
+* `/etc/init.d/*` files - look at the services present; some of which may be
+  enabled or not
+* `/etc/config/*` files - generally the source files for `uci show` but
+  displayed in a perhaps more human-readable fashion
+* `/www/*` files - the source files for the Lua web interface
+* `/sbin/*.sh`, `/usr/bin/*.sh`, `/usr/sbin/*.sh` files - the locations
+  containing various executable files, many of which are custom-written for
+  this hardware
+
 ### Services
 
 * `transformer`: critical service as it underpins the Gateway web UI.
   Stopping and disabling this service will crash/reboot the modem.
-
-### Logging
-
-Access logs for most services via the `logread` command, which accesses
-`syslog`.  For instance, to follow logs outputted relating to nginx, run:
-
-    logread -e nginx -f
 
 ### VDSL2 Introspection
 
