@@ -4,3 +4,7 @@
 * Edit the nginx config to support h2 with ssl
   * Nginx (lua) needs to correctly listen on 443
 * Crontab to update the certificates and restart nginx
+
+
+Unlocking tiles:
+http://forum.kitz.co.uk/index.php/topic,20343.msg363275.html#msg363275

@@ -84,7 +84,6 @@ uci commit
 
 # ledfw controls internet/wifi/voip/etc LEDs
 /etc/init.d/ledfw stop
-/etc/init.d/ledfw disable
 
 # Install control script so we can turn LEDs on and off via the main wifi
 # button (originally /usr/sbin/wifionoff.sh)
