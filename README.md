@@ -158,6 +158,8 @@ At this point, the modem is back running `17.2` and SSH is available on port
 1. Go to the `Gateway` card and set the timezone.  Disable `Network Timezone`
    and then choose the appropriate `Current Timezone`.
 
+1. Go to the `Internet Access` card and set the PPPoE username and password.
+
 ## Notes
 
 ### Introspection
