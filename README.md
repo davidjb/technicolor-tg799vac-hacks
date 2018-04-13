@@ -1,13 +1,16 @@
-# 
+# Technicolor Hacks
 
-## Getting started
+A collection of configuration for detoxing and improving the Technicolor
+TG799vac modem. Firstly, we flash the modem and get root, using the publicised
+methods care of [Mark Smith](https://forums.whirlpool.net.au/user/686) online.
+Then, we access the modem, switch back to more recent firmware, and then tweak
+that firmware to remove backdoors, telemetry, unecessary services, add
+features like SSH, modem UI improvements, disables LEDs so your night stays
+dark (and changes your physical WiFi button to toggle LEDs on/off) and more.
 
-* Modem and details
-* Why and what we're achieving
-* Details about the process
-
-i am with 17.3 ROOTED
-all firmwares can be rooted following the 2 steps method.
+The configuration present may work on other devices, but it is specifically
+geared for the TG799vac.  No guarantees are made that any or all of the code
+will work for you.  Test careful and be prepared.
 
 ## How to
 
@@ -178,19 +181,33 @@ want, then you can disable it thusly:
     /etc/init.d/telnet stop
     /etc/init.d/telnet disable
 
+Note that this might result in you being locked out later if say SSH were to
+crash on boot.  Unlikely, but you never know.
+
 ### VLAN for VDSL2
 
 It's possible to add the VLAN configuration into the UI.  For now, I don't
-need this but I'll consider formalising it later; open
+need this but I'll consider formalising it later.  Edit this file:
 `/www/docroot/modals/broadband-modal.lp`:
 
-local lp = require("web.lp")
-lp.setpath("/www/snippets/")
-[...towards the end...]
-lp.include('broadband-vlan.lp');
+    local lp = require("web.lp")
+    lp.setpath("/www/snippets/")
+
+    [...]
+
+    lp.include('broadband-vlan.lp');
+
+and resart Nginx.
 
 ## Credit and thanks
 
-The basis for these instructions come from Steve's blog at <https://www.crc.id.au/hacking-the-technicolor-tg799vac-and-unlocking-features/>.
+The root method is care of Mark Smith
+<https://forums.whirlpool.net.au/user/686> and is greatly appreciated.
 
+The basis for the tweak instructions come from Mark Smith and also from
+Steve's blog at
+<https://www.crc.id.au/hacking-the-technicolor-tg799vac-and-unlocking-features/>.
 
+## Licence
+
+MIT, see `LICENCE.txt`
