@@ -136,6 +136,7 @@ At this point, the modem is back running `17.2` and SSH is available on port
    * Disables *all* LEDs by default (and on boot)
    * Adds ability to turn LEDs on or using the WiFi toggle button (via the
      newly added `toggleleds.sh` script)
+   * BETA: Drops the CPU speed down to reduce power consumption
 
 1. Head to the web-based UI at `http://10.0.0.138` and go to the Advanced tab.
 
