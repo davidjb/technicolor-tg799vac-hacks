@@ -261,7 +261,7 @@ uci add_list web.tvoicecalllog.roles=admin
 uci add_list web.tvoicecapability.roles=admin
 
 # Prevent limiting cards in Bridge Mode
-sed 's/if info.bridged then/if false then/' /www/lua/cards_limiter.lua
+sed 's/if info.bridged then/if false then/' -i /www/lua/cards_limiter.lua
 
 uci commit
 
