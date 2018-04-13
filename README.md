@@ -14,15 +14,6 @@ will work for you.  Test careful and be prepared.
 
 ## How to
 
-If your modem happens to be running a newer firmware version (such as an
-Over-The-Air [OTA] upgrade that happened) or you happen to get locked out for
-any reason, try a factory reset with the modem physically disconnected from
-the Internet.
-
-To factory reset, get a paperclip and hold down the reset button for 15
-seconds.  Release the button and wait a few moments -- the modem will restore,
-all the LEDs will flash and the modem will reset.
-
 ### Setup
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
@@ -43,6 +34,15 @@ all the LEDs will flash and the modem will reset.
        pip install robobrowser==0.5.3
 
 ### Flash and get root
+
+If your modem happens to be running a newer firmware version (such as an
+Over-The-Air [OTA] upgrade that happened) or you happen to get locked out for
+any reason, try a factory reset with the modem physically disconnected from
+the Internet.
+
+To factory reset, get a paperclip and hold down the reset button for 15
+seconds.  Release the button and wait a few moments -- the modem will restore,
+all the LEDs will flash and the modem will reset.
 
 1. Start the tool:
 
@@ -85,11 +85,12 @@ ourselves root.
 
 1. Run the contents of `01-root-and-switch-fw.sh` in the SSH session:
 
-       curl https:// | sh 
+       wget https://github.com/davidjb/technicolor-hacks/raw/master/01-root-and-switch-fw.sh
+       sh ./01-root-and-switch-fw.sh
 
-   There are more secure ways to run the file; like `curl`ing the file and
-   then inspecting the contents.  It's up to you how safe you'd like to play
-   it and mostly how much you trust me / GitHub.
+   There are more secure ways to run the file, like actually inspecting the
+   contents.  It's up to you how safe you'd like to play it and mostly how
+   much you trust me / GitHub.
 
 1. Wait several minutes for the modem to reboot.
 
@@ -105,9 +106,10 @@ At this point, the modem is back running `17.2` and SSH is available on port
        passwd
 
 1. Run the contents of `02-detox.sh` in the SSH session.  The plan here is to
-   disable and reset Telstra-based config on the device.
+   disable and reset Telstra-based config on the device:
 
-       curl https:// | sh 
+       wget https://github.com/davidjb/technicolor-hacks/raw/master/02-detox.sh
+       sh ./02-detox.sh
 
 1. Add your own SSH public key into the file `/etc/dropbear/authorized_keys`.
 
@@ -131,8 +133,12 @@ At this point, the modem is back running `17.2` and SSH is available on port
 
 ## Final setup
 
-1. Configure the following optional settings with `03-configure.sh`.  These
-   are specific to using the modem as a bridge only and with my specific
+1. Configure the following optional settings with `03-configure.sh`:
+
+       wget https://github.com/davidjb/technicolor-hacks/raw/master/03-configure.sh
+       sh ./03-configure.sh
+
+   These are specific to using the modem as a bridge only and with my specific
    requirements. It does the following:
 
    * Disables WWAN support
@@ -147,7 +153,10 @@ At this point, the modem is back running `17.2` and SSH is available on port
      newly added `toggleleds.sh` script)
    * BETA: Drops the CPU speed down to reduce power consumption
 
-1. If on VDSL2 (eg FTTN/FTTC/FTTB), run the contents of `04-vdsl2.sh` as well.
+1. If on VDSL2 (eg FTTN/FTTC/FTTB), run the contents of `04-vdsl2.sh` as well:
+
+       wget https://github.com/davidjb/technicolor-hacks/raw/master/04-vdsl2.sh
+       sh ./04-vdsl2.sh
 
    Otherwise, you can go to the xDSL Config card in the UI and select your mode(s).
    If you do this, click `Save` and close the modal; the modal will look like
