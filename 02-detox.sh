@@ -43,9 +43,9 @@ uci commit
 echo > /etc/dropbear/authorized_keys
 
 
-#########################################
+################################
 # DHCP (dnsmasq) reconfiguration
-#########################################
+################################
 
 # Disable DHCP for backdoor networks
 uci set dhcp.hotspot.disabled='1'
@@ -106,7 +106,8 @@ killall -9 cwmpd cwmpdboot watchdog-tch
 #
 # By default, Telstra shares your home network out to the world
 # as "Telstra Air". This disables hotspotd to stop this madness.
-# Ref: https://...
+#
+# Ref: https://crowdsupport.telstra.com.au/t5/Modems-Hardware/Turning-off-Telstra-Air-on-Telstra-Gateway-device/td-p/565407
 ####################################
 
 uci set hotspotd.main.ipv4=0
@@ -146,7 +147,7 @@ uci commit
 # whatever purpose. Anectodal evidence says it's "only monitoring!" but we're
 # not going to waste our CPU and bandwidth for anyone.
 #
-# Ref: https://
+# Ref: https://forums.whirlpool.net.au/archive/2678687
 ############
 
 uci set tls-vsparc.Config.Enabled='0'
@@ -157,7 +158,12 @@ uci commit
 
 ##############
 # Disable UPnP
-# Ref: 
+#
+# Aside from being generally buggy, this uPnP config has an oddly named setting called
+# minitr064d.password.dslfreset with a value set what looks to be a hard-coded password.
+# Looks like another backdoor to me.
+#
+# Ref: https://www.forbes.com/sites/andygreenberg/2013/01/29/disable-a-protocol-called-upnp-on-your-router-now-to-avoid-a-serious-set-of-security-bugs/#12054ae876b4
 ##############
 
 uci set upnpd.config.enable_natpmp='0'
