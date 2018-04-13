@@ -14,6 +14,10 @@
 # Default hostname
 uci set system.@system[0].hostname='OpenWRT'
 
+# Generify PPPoE username/password
+uci set network.ppp.username='home@example.com'
+uci set network.ppp.password=''
+
 # Enable firmware upload via GUI and config import/export
 sed -e 's/if currentuserrole == "guest" /if currentuserrole == "admin" /' -i /www/docroot/modals/gateway-modal.lp
 uci set system.config.export_plaintext='1'
@@ -230,6 +234,9 @@ uci add_list web.tvoicesipconfig.roles=admin
 uci add_list web.tvoicecontacts.roles=admin
 uci add_list web.tvoicecalllog.roles=admin
 uci add_list web.tvoicecapability.roles=admin
+
+# Prevent limiting cards in Bridge Mode
+sed 's/if info.bridged then/if false then/' /www/lua/cards_limiter.lua
 
 uci commit
 
