@@ -124,5 +124,3 @@ chmod +x /usr/sbin/toggleleds.sh
 # Shut all the LEDs down so this takes effect immediately
 /usr/sbin/toggleleds.sh
 
-# Shut down LEDs on boot
-echo '/usr/sbin/toggleleds.sh' >> /etc/rc.local
