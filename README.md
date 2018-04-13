@@ -138,15 +138,16 @@ At this point, the modem is back running `17.2` and SSH is available on port
      newly added `toggleleds.sh` script)
    * BETA: Drops the CPU speed down to reduce power consumption
 
+1. If on VDSL2 (eg FTTN/FTTC/FTTB), run the contents of `04-vdsl2.sh` as well.
+
+   Otherwise, you can go to the xDSL Config card in the UI and select your mode(s).
+   If you do this, click `Save` and close the modal; the modal will look like
+   it didn't work, but it will have saved.
+
 1. Head to the web-based UI at `http://10.0.0.138` and go to the Advanced tab.
 
 1. Go to the `Gateway` card and set the timezone.  Disable `Network Timezone`
    and then choose the appropriate `Current Timezone`.
-
-1. Go to the `xDSL Config` card and choose the relevant mode(s) for your
-   Internet connection.  If on FTTN/FTTC/FTTB, select `vdsl2` only. Click
-   `Save` and close the modal; the modal will look like it didn't work, but it
-   will have saved.
 
 ## Notes
 
