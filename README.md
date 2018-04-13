@@ -237,15 +237,16 @@ and resart Nginx.
 There are various settings for IPoE within uci's settings (eg `uci show`).
 Evidence online says that IPoE is possible with this modem and may
 
-
 ## Credit and thanks
 
 The root method is care of Mark Smith
 <https://forums.whirlpool.net.au/user/686> and is greatly appreciated.
 
-The basis for the tweak instructions come from Mark Smith and also from
+The basis for the tweak instructions come from Mark Smith, from
 Steve's blog at
-<https://www.crc.id.au/hacking-the-technicolor-tg799vac-and-unlocking-features/>.
+<https://www.crc.id.au/hacking-the-technicolor-tg799vac-and-unlocking-features/>
+and various comments on [this Whirlpool
+thread](https://forums.whirlpool.net.au/archive/2650998).
 
 ## Contributing
 
