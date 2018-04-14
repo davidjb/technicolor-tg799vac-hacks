@@ -376,6 +376,16 @@ In initial testing, teaking settings appeared to drop power consumption
 slightly but it's too soon to tell.  The `--avs` (Adaptive Voltage Scaling)
 option doesn't appear to have any effect on the TG799vac.
 
+### Jumbo frames
+
+```sh
+uci set network.bcmsw.jumbo='1'
+uci commit
+/lib/network/switch.sh
+```
+
+(currently untested)
+
 ## Credit and thanks
 
 The root method is care of Mark Smith
