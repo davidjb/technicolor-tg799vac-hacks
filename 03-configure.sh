@@ -122,17 +122,3 @@ chmod +x /usr/sbin/toggleleds.sh
 
 # Shut all the LEDs down so this takes effect immediately
 /usr/sbin/toggleleds.sh
-
-
-#####################
-# Power configuration
-#####################
-
-# In basic testing, this dropped power consumption from ~9W to ~6W
-pwrctl config --cpuspeed 8      # Default: 1  (UI shows 0)
-pwrctl config --wait on         # Default: on
-pwrctl config --sr on           # Default: off
-pwrctl config --ethapd on       # Default: on
-pwrctl config --eee on          # Default: on
-pwrctl config --autogreeen on   # Default: on
-pwrctl config --avs deep        # Default: off

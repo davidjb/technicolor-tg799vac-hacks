@@ -186,7 +186,6 @@ speed boosts.
    * ~~Disables *all* LEDs by default (and on boot)~~ (not yet)
    * Adds ability to turn LEDs on or using the WiFi toggle button (via the
      newly added `toggleleds.sh` script)
-   * BETA: Drops the CPU speed down to reduce power consumption
 
    You can opt-in or out of any of these changes by just running the bits you
    want or commenting out the bits you don't.
@@ -355,6 +354,22 @@ and resart Nginx.
 
 There are various settings for IPoE within uci's settings (eg `uci show`).
 Evidence online says that IPoE is possible with this modem and may
+
+### Power configuration
+
+```sh
+pwrctl config --cpuspeed 1      # Default: 1  (UI shows 0)
+pwrctl config --wait on         # Default: on
+pwrctl config --sr off          # Default: off
+pwrctl config --ethapd on       # Default: on
+pwrctl config --eee on          # Default: on
+pwrctl config --autogreeen on   # Default: on
+pwrctl config --avs deep        # Default: off + doesn't do anything
+```
+
+In initial testing, teaking settings appeared to drop power consumption
+slightly but it's too soon to tell.  The `--avs` (Adaptive Voltage Scaling)
+option doesn't appear to have any effect on the TG799vac.
 
 ## Credit and thanks
 
