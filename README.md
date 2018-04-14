@@ -38,7 +38,6 @@ will work for you.  Test careful and be prepared.
    as indicated below.  For completeness, here are the SHA-256 hashes:
 
    ```
-   b2a8f6bb0d295893f2a59040d6ea22f9ae71208b530814f03000d3a390bcca5b vant-f_CRF540-15.53.6886-510-RF.rbi
    38b41546133b2e979befce8e824654289aa237446fc4118444f271423c35e3fa vant-f_CRF687-16.3.7567-660-RG.rbi
    0c9bf5e739600ceae61362eebc6ee271783ff85e5d60e3c3076f98bd37648d02 vant-f_CRF683-17.2.188-820-RA.rbi
    ```
