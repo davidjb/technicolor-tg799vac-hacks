@@ -204,7 +204,73 @@ speed boosts.
    Go to the `Gateway` card and set the timezone.  Disable `Network Timezone`
    and then choose the appropriate `Current Timezone`.
 
-1. Go to the `Internet Access` card and set the PPPoE username and password.
+## Final setup
+
+The last bit is to actually connect up the Internet connection.  How this
+looks is dependent on how you're planning on using the modem.
+
+### As a modem/router
+
+Head to the web-based UI at `http://10.0.0.138` and go to the Advanced tab.
+
+Go to the `Internet Access` card and set the PPPoE username and password
+and the modem should connect automatically.  You're done.
+
+### As a bridged modem
+
+1. Connect an Ethernet cable between port 1 (far left) of the modem and your
+   router's WAN port.
+
+1. Head to the web-based UI at `http://10.0.0.138` and go to the Advanced tab.
+
+1. Go to the `Local Network` card and click the link in the card heading.
+
+1. Scroll down to `Network mode` and click `Bridged Mode`.
+
+1. Confirm this action and the modem will reboot automatically.
+
+1. Whilst it reboots, go to your router's settings and configure your WAN to
+   use PPoE with the relevant username and password.  How you do this depends
+   on your router.
+
+1. Once the modem has restarted, your router should be automatically connected
+   to the Internet.
+
+From here, we need to reconfigure the modem a futher time to shut a few final
+services down like dnsmasq, WiFi and so on.  In truth, most things are already
+configured to have been disabled (via `uci` configuration), but certain
+services like `dnsmasq` and `odhcpd` are still running, though they're not
+doing anything.
+
+You can configure the setup however you'd like, but To make life simple, I put
+the modem on my main network so I can still SSH to it.  If you don't want
+this, you could manually plug an Ethernet cable into the modem if you ever
+need to access it again.
+
+1. Change the modem's IP address to be a static IP your router's subnet (such as
+   `192.168.1.x`) so it'll work as a device on the router's network:
+
+   ```sh
+   uci set network.lan.ipaddr='192.168.1.x'
+   uci set network.lan.netmask='255.255.255.0'
+   uci commit
+   /etc/init.d/network restart
+   ```
+
+1. Connect an Ethernet cable between any port on the modem to a LAN port on
+   your router.
+
+1. Access your router's network and check you now access the modem at
+   `192.168.1.x`.  The dashboard should load fine.
+
+1. Once you've confirmed this, then run the final `05-bridge-mode.sh` script
+   to shut down the remaining services.  **Note:** this includes terminating
+   WiFi so make sure you're accessing the modem via Ethernet (eg via your
+   router) at this point.
+
+1. Check out your extremely slimmed down set of open connections with
+   `netstat -lenp`: just Nginx for the web UI and Dropbear for SSH with network
+   connections and underlying dependencies listening on UNIX domain sockets.
 
 ## Notes
 
