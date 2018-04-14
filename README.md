@@ -21,6 +21,12 @@ will work for you.  Test careful and be prepared.
    line or Ethernet connection on the WAN port.  This is super important in
    ensuring that the modem's firmware doesn't go auto-updating.
 
+1. Get the latest version of these scripts; you'll need them for later:
+
+   ```sh
+   git clone https://github.com/davidjb/technicolor-hacks.git
+   ```
+
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
    tool:
 
@@ -94,17 +100,11 @@ firmware on board in its inactive, secondary flash partition.  We'll now
 switch over to the latter firmware after injecting the ability to give
 ourselves root.
 
-1. Re-connect to the modem's wifi network and SSH back in:
+1. Re-connect to the modem's wifi network and SSH back in to run the contents
+   of `01-root-and-switch-fw.sh`:
 
    ```sh
-   ssh root@10.0.0.138
-   ```
-
-1. Run the contents of `01-root-and-switch-fw.sh` in the SSH session:
-
-   ```sh
-   wget https://github.com/davidjb/technicolor-hacks/raw/master/01-root-and-switch-fw.sh
-   sh ./01-root-and-switch-fw.sh
+   ssh root@10.0.0.138 'sh' < ./01-root-and-switch-fw.sh
    ```
 
    There are more secure ways to run the file, like actually inspecting the
@@ -124,17 +124,15 @@ At this point, the modem is back running `17.2` and SSH is available on port
    ```sh
    ssh root@10.0.0.138 -p 6666
    passwd
+   exit
    ```
 
-1. Run the contents of `02-detox.sh` in the SSH session.  The plan here is to
+1. Run the contents of `02-detox.sh` on the modem the SSH session.  The plan here is to
    disable and reset Telstra-based config on the device:
 
    ```sh
-   wget https://github.com/davidjb/technicolor-hacks/raw/master/02-detox.sh
-   sh ./02-detox.sh
+   ssh root@10.0.0.138 'sh' < ./02-detox.sh
    ```
-
-1. Add your own SSH public key into the file `/etc/dropbear/authorized_keys`.
 
 1. At this point, you can now SSH back into the modem whenever you'd like on the
    standard port `22`:
@@ -153,6 +151,10 @@ At this point, the modem is back running `17.2` and SSH is available on port
    We do this last to be entirely sure you're not going to accidentally lock
    yourself out.
 
+1. Add your own SSH public key into the file `/etc/dropbear/authorized_keys`
+   on the modem.  Edit on the modem via an editor like `vi` or SCP a file from
+   your computer across.
+
 1. Reboot the modem again to finalise the configuration. This implicitly
    results in the SSH server on port `6666` no longer being started.
 
@@ -169,8 +171,7 @@ speed boosts.
 1. Run `03-configure.sh` to set various additional settings:
 
    ```sh
-   wget https://github.com/davidjb/technicolor-hacks/raw/master/03-configure.sh
-   sh ./03-configure.sh
+   ssh root@10.0.0.138 'sh' < ./03-configure.sh
    ```
 
    It does the following:
@@ -193,8 +194,7 @@ speed boosts.
 1. If on VDSL2 (eg FTTN/FTTC/FTTB), run `04-vdsl2.sh` as well:
 
    ```sh
-   wget https://github.com/davidjb/technicolor-hacks/raw/master/04-vdsl2.sh
-   sh ./04-vdsl2.sh
+   ssh root@10.0.0.138 'sh' < ./04-vdsl2.sh
    ```
 
    Otherwise, you can go to the xDSL Config card in the UI and select your mode(s).
@@ -267,7 +267,11 @@ need to access it again.
 1. Once you've confirmed this, then run the final `05-bridge-mode.sh` script
    to shut down the remaining services.  **Note:** this includes terminating
    WiFi so make sure you're accessing the modem via Ethernet (eg via your
-   router) at this point.
+   router) at this point.  Also make sure you use your new IP address.
+
+   ```sh
+   ssh root@192.168.1.x 'sh' < ./04-vdsl2.sh
+   ```
 
 1. Check out your extremely slimmed down set of open connections with
    `netstat -lenp`: just Nginx for the web UI and Dropbear for SSH with network
