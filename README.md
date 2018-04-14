@@ -183,9 +183,9 @@ speed boosts.
    * Disables Traffice Monitoring
    * Disables Time of Day ACL rules
    * Explicitly disables Wake on LAN (not enabled by default)
-   * ~~Disables *all* LEDs by default (and on boot)~~ (not yet)
    * Adds ability to turn LEDs on or using the WiFi toggle button (via the
      newly added `toggleleds.sh` script)
+   * Disables *all* LEDs by default (and on boot)
 
    You can opt-in or out of any of these changes by just running the bits you
    want or commenting out the bits you don't.
@@ -293,6 +293,8 @@ are helpful:
   which is perfect for debugging errors in the web UI.
 * `/etc/init.d/*` files - look at the services present; some of which may be
   enabled or not
+* `for F in /etc/init.d/* ; do $F enabled && echo $F on || echo $F **disabled**; done` -
+  display the status of all init scripts
 * `/etc/config/*` files - generally the source files for `uci show` but
   displayed in a perhaps more human-readable fashion
 * `/www/*` files - the source files for the Lua web interface

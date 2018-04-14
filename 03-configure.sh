@@ -110,7 +110,7 @@ else
     /etc/init.d/hostapd restart
   fi
 
-  sleep 2
+  sleep 0.5
 
   # Blue power light
   led="/sys/class/leds/power"
@@ -120,5 +120,28 @@ fi
 EOF
 chmod +x /usr/sbin/toggleleds.sh
 
+
+cat > /etc/init.d/leds-off << EOF
+#!/bin/sh /etc/rc.common
+
+START=99   # Must be after ledfw (12) and led (96)
+LEDFW_STATUS=\$(pidof ledfw.lua)
+
+start() {
+  if [ -n "\$LEDFW_STATUS" ]; then
+    # Toggle off if ledfw is running
+    /usr/sbin/toggleleds.sh
+  else
+    # Explictly turn everything off
+    for led in /sys/class/leds/*; do
+      echo '0' > "\$led/brightness"
+      echo 'none' > "\$led/trigger"
+    done
+  fi
+}
+EOF
+chmod +x /etc/init.d/leds-off
+
 # Shut all the LEDs down so this takes effect immediately
-/usr/sbin/toggleleds.sh
+/etc/init.d/leds-off enable
+/etc/init.d/leds-off start
