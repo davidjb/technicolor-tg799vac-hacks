@@ -16,22 +16,32 @@ will work for you.  Test careful and be prepared.
 
 ### Setup
 
+1. Disconnect any form of WAN connection from your modem, such as the xDSL
+   line or Ethernet connection on the WAN port.  This is super important in
+   ensuring that the modem's firmware doesn't go auto-updating.
+
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
    tool:
 
-       git clone https://github.com/mswhirl/autoflashgui.git
+   ```sh
+   git clone https://github.com/mswhirl/autoflashgui.git
+   ```
 
 1. Get the firmware for your TG799vac device.  You'll need the two firmwares
    as indicated below.  For completeness, here are the hashes:
 
-   ... TODO
+   > b2a8f6bb0d295893f2a59040d6ea22f9ae71208b530814f03000d3a390bcca5b vant-f_CRF540-15.53.6886-510-RF.rbi
+   > 38b41546133b2e979befce8e824654289aa237446fc4118444f271423c35e3fa vant-f_CRF687-16.3.7567-660-RG.rbi
+   > 0c9bf5e739600ceae61362eebc6ee271783ff85e5d60e3c3076f98bd37648d02 vant-f_CRF683-17.2.188-820-RA.rbi
 
 1. Setup the `autoflashgui` tool:
 
-       cd autoflashgui
-       virtualenv .
-       . ./bin/activate
-       pip install robobrowser==0.5.3
+   ```sh
+   cd autoflashgui
+   virtualenv .
+   . ./bin/activate
+   pip install robobrowser==0.5.3
+   ```
 
 ### Flash and get root
 
@@ -46,7 +56,9 @@ all the LEDs will flash and the modem will reset.
 
 1. Start the tool:
 
-       python autoflashgui.py
+   ```sh
+   python autoflashgui.py
+   ```
 
 1. Flash `vant-f_CRF683-17.2.188-820-RA.rbi` with the tool.  This will fail to
    root (console will continually keep trying to connect and fail; this is
@@ -62,8 +74,10 @@ all the LEDs will flash and the modem will reset.
 1. When done, SSH to the modem as `root` and change the password
    **immediately**:
 
-       ssh root@10.0.0.138
-       passwd
+   ```sh
+   ssh root@10.0.0.138
+   passwd
+   ```
 
 1. Remove the pre-existing `/etc/dropbear/authorized_keys` file and ideally
    replace it with your own.  This is a fun little backdoor the devs left
@@ -81,12 +95,16 @@ ourselves root.
 
 1. Re-connect to the modem's wifi network and SSH back in:
 
-       ssh root@10.0.0.138
+   ```sh
+   ssh root@10.0.0.138
+   ```
 
 1. Run the contents of `01-root-and-switch-fw.sh` in the SSH session:
 
-       wget https://github.com/davidjb/technicolor-hacks/raw/master/01-root-and-switch-fw.sh
-       sh ./01-root-and-switch-fw.sh
+   ```sh
+   wget https://github.com/davidjb/technicolor-hacks/raw/master/01-root-and-switch-fw.sh
+   sh ./01-root-and-switch-fw.sh
+   ```
 
    There are more secure ways to run the file, like actually inspecting the
    contents.  It's up to you how safe you'd like to play it and mostly how
@@ -102,26 +120,34 @@ At this point, the modem is back running `17.2` and SSH is available on port
 1. Re-connect to the modem's wifi network and SSH back in.  The password is
    currently `root`, which you'll change **immediately**:
 
-       ssh root@10.0.0.138 -p 6666
-       passwd
+   ```sh
+   ssh root@10.0.0.138 -p 6666
+   passwd
+   ```
 
 1. Run the contents of `02-detox.sh` in the SSH session.  The plan here is to
    disable and reset Telstra-based config on the device:
 
-       wget https://github.com/davidjb/technicolor-hacks/raw/master/02-detox.sh
-       sh ./02-detox.sh
+   ```sh
+   wget https://github.com/davidjb/technicolor-hacks/raw/master/02-detox.sh
+   sh ./02-detox.sh
+   ```
 
 1. Add your own SSH public key into the file `/etc/dropbear/authorized_keys`.
 
 1. At this point, you can now SSH back into the modem whenever you'd like on the
    standard port `22`:
 
-       ssh root@10.0.0.138
+   ```sh
+   ssh root@10.0.0.138
+   ```
 
    Once you've confirmed you can do this, clear the original configuration we
    used to root the modem with:
 
-        echo > /etc/rc.local
+   ```sh
+   echo > /etc/rc.local
+   ```
 
    We do this last to be entirely sure you're not going to accidentally lock
    yourself out.
@@ -129,17 +155,24 @@ At this point, the modem is back running `17.2` and SSH is available on port
 1. Reboot the modem again to finalise the configuration. This implicitly
    results in the SSH server on port `6666` no longer being started.
 
-       reboot
+   ```sh
+   reboot
+   ```
 
-## Final setup
+## Futher customisation
 
-1. Configure the following optional settings with `03-configure.sh`:
+The following are specific configuration items to using the modem *as* a basic
+modem only, with a few improvements like the ability to turn off the LEDs and
+speed boosts.
 
-       wget https://github.com/davidjb/technicolor-hacks/raw/master/03-configure.sh
-       sh ./03-configure.sh
+1. Run `03-configure.sh` to set various additional settings:
 
-   These are specific to using the modem as a bridge only and with my specific
-   requirements. It does the following:
+   ```sh
+   wget https://github.com/davidjb/technicolor-hacks/raw/master/03-configure.sh
+   sh ./03-configure.sh
+   ```
+
+   It does the following:
 
    * Disables WWAN support
    * Disables Printer sharing
@@ -148,23 +181,27 @@ At this point, the modem is back running `17.2` and SSH is available on port
    * Disables Traffice Monitoring
    * Disables Time of Day ACL rules
    * Explicitly disables Wake on LAN (not enabled by default)
-   * Disables *all* LEDs by default (and on boot)
+   * ~~Disables *all* LEDs by default (and on boot)~~ (not yet)
    * Adds ability to turn LEDs on or using the WiFi toggle button (via the
      newly added `toggleleds.sh` script)
    * BETA: Drops the CPU speed down to reduce power consumption
 
-1. If on VDSL2 (eg FTTN/FTTC/FTTB), run the contents of `04-vdsl2.sh` as well:
+   You can opt-in or out of any of these changes by just running the bits you
+   want or commenting out the bits you don't.
 
-       wget https://github.com/davidjb/technicolor-hacks/raw/master/04-vdsl2.sh
-       sh ./04-vdsl2.sh
+1. If on VDSL2 (eg FTTN/FTTC/FTTB), run `04-vdsl2.sh` as well:
+
+   ```sh
+   wget https://github.com/davidjb/technicolor-hacks/raw/master/04-vdsl2.sh
+   sh ./04-vdsl2.sh
+   ```
 
    Otherwise, you can go to the xDSL Config card in the UI and select your mode(s).
    If you do this, click `Save` and close the modal; the modal will look like
    it didn't work, but it will have saved.
 
 1. Head to the web-based UI at `http://10.0.0.138` and go to the Advanced tab.
-
-1. Go to the `Gateway` card and set the timezone.  Disable `Network Timezone`
+   Go to the `Gateway` card and set the timezone.  Disable `Network Timezone`
    and then choose the appropriate `Current Timezone`.
 
 1. Go to the `Internet Access` card and set the PPPoE username and password.
