@@ -34,7 +34,9 @@ will work for you.  Test careful and be prepared.
    git clone https://github.com/mswhirl/autoflashgui.git
    ```
 
-1. Get the firmware for your TG799vac device.  You'll need the two firmwares
+1. [Get the
+   firmware](https://drive.google.com/drive/folders/1n9IAp9qUauTT9eMLf3oYQMbodFEGFHyL)
+   for your TG799vac device.  You'll need the two firmwares
    as indicated below.  For completeness, here are the SHA-256 hashes:
 
    ```
