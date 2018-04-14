@@ -43,4 +43,3 @@ uci commit
 # Not needed as we're no longer a router and thus unconcerned with multicast
 /etc/init.d/igmpproxy stop
 /etc/init.d/igmpproxy disable
-
