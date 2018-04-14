@@ -1,12 +1,13 @@
 # Technicolor Hacks
 
-A collection of configuration for detoxing and improving the Technicolor
-TG799vac modem. Firstly, we flash the modem and get root, using the publicised
-methods care of [Mark Smith](https://forums.whirlpool.net.au/user/686) online.
-Then, we access the modem, switch back to more recent firmware, and then tweak
-that firmware to remove backdoors, telemetry, unecessary services, add
-features like SSH, modem UI improvements, disables LEDs so your night stays
-dark (and changes your physical WiFi button to toggle LEDs on/off) and more.
+A collection of configuration for detoxing and improving the [Technicolor
+TG799vac](https://bc.whirlpool.net.au/bc/hardware/?action=h_view&model_id=1622)
+modem. Firstly, we flash the modem and get root, using the publicised methods
+care of [Mark Smith](https://forums.whirlpool.net.au/user/686) online.  Then,
+we access the modem, switch back to more recent firmware, and then tweak that
+firmware to remove backdoors, telemetry, unecessary services, add features
+like SSH, modem UI improvements, disables LEDs so your night stays dark (and
+changes your physical WiFi button to toggle LEDs on/off) and more.
 
 The configuration present may work on other devices, but it is specifically
 geared for the TG799vac.  No guarantees are made that any or all of the code
