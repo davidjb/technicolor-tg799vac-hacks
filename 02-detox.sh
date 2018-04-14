@@ -26,6 +26,16 @@ uci set system.config.import_plaintext='1'
 uci set system.config.import_unsigned='1'
 uci commit
 
+# Enable generic packages from the brcm63xx architecture
+# Note that some/mamy packages may conflict so YMMV with what can be installed
+# Download files at https://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/generic/packages/
+# and install via `opkg install ./package-name.ipk`
+cat >> /etc/opkg.conf << EOF
+arch all 100
+arch brcm63xx-tch 200
+arch brcm63xx 300
+EOF
+
 
 ###################
 # Enable SSH server
