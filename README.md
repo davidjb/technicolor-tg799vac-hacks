@@ -327,10 +327,16 @@ are helpful:
 The following packages from
 <https://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/generic/packages/packages/>
 have been confirmed to work on this device.  Most others should work, but some
-may conflict with existing packages.
+may conflict with existing packages or files on the device.
 
+* `openssh-client`
+* `openssh-client-utils`
+* `openssh-keygen`
 * `openssh-sftp-client`
 * `unzip`
+
+Various backup copies of packages can be found in the `pkg/` directory in this
+repository.
 
 ### VDSL2 Introspection
 
