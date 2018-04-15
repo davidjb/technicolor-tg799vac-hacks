@@ -24,17 +24,14 @@ uci commit
 /etc/init.d/dnsmasq stop
 /etc/init.d/dnsmasq disable
 
-############################
-# ntpd: disable network time
-############################
+###################################
+# ntpd: disable network time server
+###################################
 
-# The modem can't access the Internet so no point running this
-uci set system.ntp.enable='0'
 uci set system.ntp.enable_server='0'
 uci commit
 
-/etc/init.d/sysntpd stop
-/etc/init.d/sysntpd disable
+/etc/init.d/sysntpd restart
 
 ####################
 # Disable IGMP Proxy
