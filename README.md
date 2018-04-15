@@ -130,8 +130,11 @@ At this point, the modem is back running `17.2` and SSH is available on port
    exit
    ```
 
-1. Run the contents of `02-detox.sh` on the modem the SSH session.  The plan here is to
-   disable and reset Telstra-based config on the device:
+1. Run the contents of `02-detox.sh` on the modem the SSH session.  The plan
+   here is to disable and reset Telstra-based config on the device, disable
+   OTA updates, close other security holes and backdoors, disable telemetry,
+   and unlock various other features like SSH, web UI and so on. Consult the
+   source to check the specifics if you want to opt-in to specific changes:
 
    ```sh
    ssh root@10.0.0.138 'sh' < ./02-detox.sh
@@ -309,6 +312,16 @@ are helpful:
 
 * `transformer`: critical service as it underpins the Gateway web UI.
   Stopping and disabling this service will crash/reboot the modem.
+
+### Compatible packages (opkg)
+
+The following packages from
+<https://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/generic/packages/packages/>
+have been confirmed to work on this device.  Most others should work, but some
+may conflict with existing packages.
+
+* `openssh-sftp-client`
+* `unzip`
 
 ### VDSL2 Introspection
 
