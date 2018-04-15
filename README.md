@@ -282,6 +282,15 @@ need to access it again.
    `netstat -lenp`: just Nginx for the web UI and Dropbear for SSH with network
    connections and underlying dependencies listening on UNIX domain sockets.
 
+1. Install any other OpenWRT packages you want. At this point, your bridged
+   modem probably doesn't have access to the web so download packages to your
+   local computer, SCP them to the modem and install like so:
+
+   ```sh
+   opkg install ./package-name-here1.0_brcm63xx.ipk
+   ```
+
+
 ## Notes
 
 ### Introspection
