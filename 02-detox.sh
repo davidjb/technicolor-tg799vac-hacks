@@ -168,7 +168,7 @@ uci commit
 /etc/init.d/lte-doctor-logger disable
 
 
-############
+####################################################
 # Disable TLS-vSPARC (internet connection telemetry)
 #
 # By default, Telstra have a ping/speedtest app running continuiously for
@@ -176,7 +176,7 @@ uci commit
 # not going to waste our CPU and bandwidth for anyone.
 #
 # Ref: https://forums.whirlpool.net.au/archive/2678687
-############
+####################################################
 
 uci set tls-vsparc.Config.Enabled='0'
 uci set tls-vsparc.Passive.PassiveEnabled='0'
