@@ -210,10 +210,10 @@ speed boosts.
    Go to the `Gateway` card and set the timezone.  Disable `Network Timezone`
    and then choose the appropriate `Current Timezone`.
 
-## Final setup
+## Getting Internet access
 
-The last bit is to actually connect up the Internet connection.  How this
-looks is dependent on how you're planning on using the modem.
+The last step in actually getting connected up the Internet comes down to
+on how you're planning on using the modem.
 
 ### As a modem/router
 
@@ -282,6 +282,8 @@ need to access it again.
    `netstat -lenp`: just Nginx for the web UI and Dropbear for SSH with network
    connections and underlying dependencies listening on UNIX domain sockets.
 
+## Even more
+
 1. Install any other OpenWRT packages you want. At this point, your bridged
    modem probably doesn't have access to the web so download packages to your
    local computer, SCP them to the modem and install like so:
@@ -290,6 +292,32 @@ need to access it again.
    opkg install ./package-name-here1.0_brcm63xx.ipk
    ```
 
+1. Set the `admin` user's password in your modem's UI under the `Maintenance`
+   tab. Once this is set, the UI will prompt for login instead of just showing
+   the advanced dashboard automatically.
+
+1. Improve the security on the web interface for the modem by installing the
+   `nginx.conf` file present in this repo over the top of the existing config.
+   This requires a little tweaking because of server name-specific
+   configuration to workaround redirection in nginx:
+
+   ```sh
+   IP=192.168.1.x
+   HOSTNAME=modem.example.com
+   sed "s/10.0.0.138/$IP/g" nginx.template.conf > nginx.conf
+   sed -i "s/mygateway.gateway/$HOSTNAME/g" nginx.conf
+   scp nginx.conf root@$IP:/etc/nginx/nginx.conf
+   ssh root@$IP '/etc/init.d/nginx restart'
+   ```
+
+   This config hardens the Nginx instance by stopping listening on
+   "assistance" port 55555 and port 8080 for proxying, as well as minor
+   improvements as well with using HSTS, redirecting port 80 to 443 and
+   running only over 443 / HTTPS.
+
+   Note that the modem generated its own self-signed certificate so you might
+   want to consider setting up your own Let's Encrypt certificate on the modem
+   via [acme.sh](https://github.com/Neilpang/acme.sh).
 
 ## Notes
 
