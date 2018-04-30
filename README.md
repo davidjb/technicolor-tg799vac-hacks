@@ -72,7 +72,9 @@ all the LEDs will flash and the modem will reset.
 
 1. Flash `vant-f_CRF683-17.2.188-820-RA.rbi` with the tool.  This will fail to
    root (console will continually keep trying to connect and fail; this is
-   okay).
+   okay).  In my second attempt with a modem starting from firmware 15.3, this
+   actually appeared to succeed and send comamnds to the newly-booted 17.2
+   firmware, but the SSH port wasn't open.
 
 1. Kill the tool in the console with `Control-C`.
 
@@ -137,7 +139,7 @@ At this point, the modem is back running `17.2` and SSH is available on port
    source to check the specifics if you want to opt-in to specific changes:
 
    ```sh
-   ssh root@10.0.0.138 'sh' < ./02-detox.sh
+   ssh root@10.0.0.138 -p 6666 'sh' < ./02-detox.sh
    ```
 
 1. At this point, you can now SSH back into the modem whenever you'd like on the
@@ -275,7 +277,7 @@ need to access it again.
    router) at this point.  Also make sure you use your new IP address.
 
    ```sh
-   ssh root@192.168.1.x 'sh' < ./04-vdsl2.sh
+   ssh root@192.168.1.x 'sh' < ./05-bridge-mode.sh
    ```
 
 1. Check out your extremely slimmed down set of open connections with
