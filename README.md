@@ -141,6 +141,14 @@ At this point, the modem is back running `17.2` and SSH is available on port
    ```sh
    ssh root@10.0.0.138 -p 6666 'sh' < ./02-detox.sh
    ```
+   
+   There's a bit happening here in this script so I encourage you to check out
+   the [source](https://github.com/davidjb/technicolor-hacks/blob/master/02-detox.sh)
+   to note what's being disabled and modified.  In particular, you can confirm
+   that TR-069/CWMP is disabled by following the [comments in the script](https://github.com/davidjb/technicolor-hacks/blob/master/02-detox.sh#L88)
+   so that you're sure you've protected yourself against the relevant
+   [security risks](https://en.wikipedia.org/wiki/TR-069#Security_risks)
+   associated with this protocol.
 
 1. At this point, you can now SSH back into the modem whenever you'd like on the
    standard port `22`:
