@@ -65,10 +65,10 @@ uci commit
 
 
 #####################################
-# Disable DHPC relay (dhcpopassthrud)
+# Disable DHCP relay (dhcpopassthrud)
 #
-# The Relay Setup card will still show 'enabled' but this is because it is hard
-# coded into /www/cards/018_relaysetup.lp.
+# The Relay Setup card will still show 'enabled' but this is because it is
+# hardcoded into /www/cards/018_relaysetup.lp.
 #####################################
 
 /etc/init.d/dhcpopassthrud stop
@@ -87,6 +87,12 @@ uci commit
 
 ##################################
 # Disble CWMP over-the-air updates
+# This protects against security risks as per https://en.wikipedia.org/wiki/TR-069#Security_risks
+#
+# To confirm this is disabled, run:
+#     netstat -tuplen | grep cwmp
+# and check for output.  If nothing is shown, you're sorted in this regard.
+#
 ##################################
 
 # Display the CWMP configuration tile
