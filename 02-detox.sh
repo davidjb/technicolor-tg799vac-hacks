@@ -36,6 +36,9 @@ arch brcm63xx-tch 200
 arch brcm63xx 300
 EOF
 
+# Use an SVG Technicolor logo (modifies Lua templates accordingly)
+sed -e 's#/img/logo.gif#/img/technicolor-logo.svg#' -i /www/docroot/gateway.lp /www/docroot/login.lp /www/docroot/parental-block.lp /www/docroot/password-reset.lp /www/docroot/password.lp
+
 
 ###################
 # Enable SSH server
@@ -287,6 +290,6 @@ uci commit
 ##############
 
 # Restart Nginx so that changes to Lua files are picked up
-# If running any configuration parts above which involve `.lp` files, this step
+# When running any configuration parts above which involve `.lp` files, this step
 # will need to be run separately.
 /etc/init.d/nginx restart

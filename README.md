@@ -135,8 +135,9 @@ At this point, the modem is back running `17.2` and SSH is available on port
 1. Run the contents of `02-detox.sh` on the modem the SSH session.  The plan
    here is to disable and reset Telstra-based config on the device, disable
    OTA updates, close other security holes and backdoors, disable telemetry,
-   and unlock various other features like SSH, web UI and so on. Consult the
-   source to check the specifics if you want to opt-in to specific changes:
+   replace the Telstra logo with Technicolor's logo and unlock various other
+   features like SSH, web UI and so on. Consult the source to check the
+   specifics if you want to opt-in to specific changes:
 
    ```sh
    ssh root@10.0.0.138 -p 6666 'sh' < ./02-detox.sh
@@ -170,6 +171,13 @@ At this point, the modem is back running `17.2` and SSH is available on port
 1. Add your own SSH public key into the file `/etc/dropbear/authorized_keys`
    on the modem.  Edit on the modem via an editor like `vi` or SCP a file from
    your computer across.
+
+1. Copy the `technicolor-logo.svg` image to your modem's `img` directory like
+   so such that it becomes available for use in the web interface:
+
+   ```sh
+   scp technicolor-logo.svg root@10.0.0.138:/www/docroot/img/
+   ```
 
 1. Reboot the modem again to finalise the configuration. This implicitly
    results in the SSH server on port `6666` no longer being started.

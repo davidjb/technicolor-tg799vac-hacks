@@ -77,7 +77,6 @@ uci commit
 /etc/init.d/wol stop
 /etc/init.d/wol disable
 
-
 #########################
 # Ability to control LEDs
 #########################
