@@ -11,7 +11,8 @@ changes your physical WiFi button to toggle LEDs on/off) and more.
 
 The configuration present may work on other devices, but it is specifically
 geared for the TG799vac.  No guarantees are made that any or all of the code
-will work for you.  Test careful and be prepared.
+will work for you or suit your needs.  Test carefully and be prepared that
+some or all may not work on your device.
 
 ## How to
 
