@@ -369,12 +369,33 @@ are helpful:
 * `transformer`: critical service as it underpins the Gateway web UI.
   Stopping and disabling this service will crash/reboot the modem.
 
-### Compatible packages (opkg)
+### Compatible OpenWrt packages (opkg)
+
+To confirm which version of OpenWrt you're running, look at the release file
+by running the following command on the modem:
+
+    cat /etc/openwrt_release
+
+In my case, this looks like so:
+
+    DISTRIB_ID='OpenWrt'
+    DISTRIB_RELEASE='Chaos Calmer'
+    DISTRIB_REVISION='r46610'
+    DISTRIB_CODENAME='chaos_calmer'
+    DISTRIB_TARGET='brcm63xx-tch/VANTF'
+    DISTRIB_DESCRIPTION='OpenWrt Chaos Calmer 15.05.1'
+    DISTRIB_TAINTS='no-all busybox'
+
+So I can see I'm using version 15.05.1, the release called Chaos Calmer. I can
+also see the chipset/architecture my OpenWrt and its packages were built for
+-- `brcm63xx-tch`.  The `-tch` at the end implies something special for
+Technicolor (assuming TCH isn't some grand coincidence since they use TCH as
+their stock ticker, SSH key comments and so on) but in my experience, packages
+for the `brcm63xx` architecture all work fine.
 
 The following packages from
 <https://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/generic/packages/packages/>
-have been confirmed to work on this device.  Most others should work, but some
-may conflict with existing packages or files on the device.
+have been confirmed to work on this device:
 
 * `openssh-client`
 * `openssh-client-utils`
@@ -382,8 +403,19 @@ may conflict with existing packages or files on the device.
 * `openssh-sftp-client`
 * `unzip`
 
+For other release versions or differing hardware, browse up the directory
+structure on that URL and find your own compatible packages.
+
 Various backup copies of packages can be found in the `pkg/` directory in this
-repository.
+repository.  I manually copy the packages onto my modem since my modem is
+configured as a bridge and is explicitly configured not to have Internet
+access.
+
+Most other packages for this OpenWrt release/architecture should work, but
+some may conflict with existing packages or files on the device.  There's also
+only 32MB of storage on the modem (24.3MB available on mine) so this is a
+pretty limiting factor in installing extra software.
+
 
 ### VDSL2 Introspection
 
