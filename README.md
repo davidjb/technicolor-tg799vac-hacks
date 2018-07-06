@@ -25,7 +25,7 @@ some or all may not work on your device.
 1. Get the latest version of these scripts; you'll need them for later:
 
    ```sh
-   git clone https://github.com/davidjb/technicolor-hacks.git
+   git clone https://github.com/davidjb/technicolor-tg799vac-hacks.git
    ```
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
