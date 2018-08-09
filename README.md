@@ -77,12 +77,22 @@ all the LEDs will flash and the modem will reset.
    actually appeared to succeed and send comamnds to the newly-booted 17.2
    firmware, but the SSH port wasn't open.
 
+
 1. Kill the tool in the console with `Control-C`.
 
 1. Flash `vant-f_CRF687-16.3.7567-660-RG.rbi` with the tool. This will take a
    little while as it authenticates, then flashes, waits for a reboot of the
    modem and then eventually proceeds to perform command injection on the
    modem.
+
+   If at this point the modem is not allowing SSH connections, then you may
+   need to reflash the version of 17.2 now when on what should be a rooted
+   version of 16.3.  This is something I observed when the firmware first
+   started out at 17.2 on one specific device, so I suspect the flashing of
+   17.2 when already on some version of 17.2 meant the flash didn't take or
+   apply correctly.  In any case, reflashing 17.2 at this point (and then
+   reflashing 16.3 *again*...) solved this for me.  Once you do get an SSH
+   session available, you can continue on.
 
 1. When done, SSH to the modem as `root` and change the password
    **immediately**:
@@ -415,7 +425,6 @@ Most other packages for this OpenWrt release/architecture should work, but
 some may conflict with existing packages or files on the device.  There's also
 only 32MB of storage on the modem (24.3MB available on mine) so this is a
 pretty limiting factor in installing extra software.
-
 
 ### VDSL2 Introspection
 
