@@ -30,8 +30,8 @@ instead of cloning and running scripts interactive using PuTTY).
    ensuring that the modem's firmware doesn't go auto-updating.
    
 1. Have a computer or device on hand where you can set up the following tools.
-   If you don't have Python or Git installed, you'll need to install them both
-   or figure out a plan to proceed manually.
+   If you don't have Python (with tkinter support) or Git installed, you'll
+   need to install them both or figure out a plan to proceed manually.
 
 1. Get the latest version of these scripts; you'll need them for later:
 
