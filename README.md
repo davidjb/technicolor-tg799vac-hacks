@@ -32,7 +32,11 @@ instead of cloning and running scripts interactive using PuTTY).
 1. Have a computer or device on hand where you can set up the following tools.
    If you don't have Python (with tkinter support) or Git installed, you'll
    need to install them both or figure out a plan to proceed manually.
-
+   
+   Your device will need to have a GUI (eg not be a headless server) 
+   as well for at least when tkinter gets used for the `autoflashgui` tool.
+   Everything else should work headless, if you're so inclined.
+   
 1. Get the latest version of these scripts; you'll need them for later:
 
    ```sh
