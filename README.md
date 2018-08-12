@@ -14,6 +14,13 @@ geared for the TG799vac.  No guarantees are made that any or all of the code
 will work for you or suit your needs.  Test carefully and be prepared that
 some or all may not work on your device.
 
+Instructions are currently written for use on a \*nix-style OS but have
+been successfully also used under Windows as well.  If you're on Windows,
+you can can try with the 
+Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+or simply just do things manually (such as downloading zip files from GitHub
+instead of cloning and running scripts interactive using PuTTY).
+
 ## How to
 
 ### Setup
@@ -21,12 +28,18 @@ some or all may not work on your device.
 1. Disconnect any form of WAN connection from your modem, such as the xDSL
    line or Ethernet connection on the WAN port.  This is super important in
    ensuring that the modem's firmware doesn't go auto-updating.
+   
+1. Have a computer or device on hand where you can set up the following tools.
+   If you don't have Python or Git installed, you'll need to install them both
+   or figure out a plan to proceed manually.
 
 1. Get the latest version of these scripts; you'll need them for later:
 
    ```sh
    git clone https://github.com/davidjb/technicolor-tg799vac-hacks.git
    ```
+   
+   Make sure you do this on your computer/device rather than on your modem.
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
    tool:
@@ -34,6 +47,8 @@ some or all may not work on your device.
    ```sh
    git clone https://github.com/mswhirl/autoflashgui.git
    ```
+   
+   Again, make sure this is on your computer/device and not your modem.
 
 1. [Get the
    firmware](https://drive.google.com/drive/folders/1n9IAp9qUauTT9eMLf3oYQMbodFEGFHyL)
@@ -50,7 +65,7 @@ some or all may not work on your device.
    ```sh
    cd autoflashgui
    virtualenv .
-   . ./bin/activate
+   source ./bin/activate
    pip install robobrowser==0.5.3
    ```
 
