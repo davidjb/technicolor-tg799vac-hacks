@@ -84,9 +84,11 @@ uci commit
 # ledfw controls internet/wifi/voip/etc LEDs
 /etc/init.d/ledfw stop
 
-# Install control script so we can turn LEDs on and off via the main wifi
-# button (originally /usr/sbin/wifionoff.sh)
-uci set button.wifi_onoff.handler='toggleleds.sh'
+# Install control script so we can turn LEDs on and off via the 'Status' button
+# Some firmware refer to this as `button.info` rather than `button.easy_reset`
+uci set button.easy_reset.handler='toggleleds.sh'  # Original value: rtfd
+uci set button.easy_reset.min='0'                  # Original value: 7
+uci set button.easy_reset.max='2'                  # Original value: 90
 uci commit
 cat > /usr/sbin/toggleleds.sh << EOF
 #!/bin/sh
