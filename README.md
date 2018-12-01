@@ -15,6 +15,13 @@ geared for the TG799vac.  No guarantees are made that any or all of the code
 will work for you or suit your needs.  Test carefully and be prepared that
 some or all may not work on your device.
 
+Instructions are currently written for use on a \*nix-style OS but have
+been successfully also used under Windows as well.  If you're on Windows,
+you can can try with the 
+Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+or simply just do things manually (such as downloading zip files from GitHub
+instead of cloning and running scripts interactive using PuTTY).
+
 ## How to
 
 ### Setup
@@ -22,12 +29,22 @@ some or all may not work on your device.
 1. Disconnect any form of WAN connection from your modem, such as the xDSL
    line or Ethernet connection on the WAN port.  This is super important in
    ensuring that the modem's firmware doesn't go auto-updating.
-
+   
+1. Have a computer or device on hand where you can set up the following tools.
+   If you don't have Python (with tkinter support) or Git installed, you'll
+   need to install them both or figure out a plan to proceed manually.
+   
+   Your device will need to have a GUI (eg not be a headless server) 
+   as well for at least when tkinter gets used for the `autoflashgui` tool.
+   Everything else should work headless, if you're so inclined.
+   
 1. Get the latest version of these scripts; you'll need them for later:
 
    ```sh
    git clone https://github.com/davidjb/technicolor-tg799vac-hacks.git
    ```
+   
+   Make sure you do this on your computer/device rather than on your modem.
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
    tool:
@@ -35,6 +52,8 @@ some or all may not work on your device.
    ```sh
    git clone https://github.com/mswhirl/autoflashgui.git
    ```
+   
+   Again, make sure this is on your computer/device and not your modem.
 
 1. [Get the
    firmware](https://drive.google.com/drive/folders/1n9IAp9qUauTT9eMLf3oYQMbodFEGFHyL)
@@ -51,7 +70,7 @@ some or all may not work on your device.
    ```sh
    cd autoflashgui
    virtualenv .
-   . ./bin/activate
+   source ./bin/activate
    pip install robobrowser==0.5.3
    ```
 
@@ -100,6 +119,7 @@ all the LEDs will flash and the modem will reset.
 
    ```sh
    ssh root@10.0.0.138
+   # Now on the modem...
    passwd
    ```
 
@@ -140,6 +160,7 @@ At this point, the modem is back running `17.2` and SSH is available on port
 
    ```sh
    ssh root@10.0.0.138 -p 6666
+   # Now on the modem...
    passwd
    exit
    ```
@@ -170,8 +191,8 @@ At this point, the modem is back running `17.2` and SSH is available on port
    ssh root@10.0.0.138
    ```
 
-   Once you've confirmed you can do this, clear the original configuration we
-   used to root the modem with:
+1. Once you've confirmed you can do this, run the following in the SSH session
+   on the modem to clear the original configuration we used to root the modem:
 
    ```sh
    echo > /etc/rc.local
@@ -184,18 +205,20 @@ At this point, the modem is back running `17.2` and SSH is available on port
    on the modem.  Edit on the modem via an editor like `vi` or SCP a file from
    your computer across.
 
-1. Copy the `technicolor-logo.svg` image to your modem's `img` directory like
-   so such that it becomes available for use in the web interface:
+1. Back on your host machine, copy the `technicolor-logo.svg` image to your
+   modem's `img` directory such that it becomes available for use in the web interface:
 
    ```sh
    scp technicolor-logo.svg root@10.0.0.138:/www/docroot/img/
    ```
+   
+   If on Windows, you can use WinSCP to achieve this.
 
 1. Reboot the modem again to finalise the configuration. This implicitly
    results in the SSH server on port `6666` no longer being started.
 
    ```sh
-   reboot
+   ssh root@10.0.0.138 'reboot'
    ```
 
 ## Futher customisation
@@ -287,6 +310,8 @@ need to access it again.
    `192.168.1.x`) so it'll work as a device on the router's network:
 
    ```sh
+   ssh root@10.0.0.138
+   # Set your own LAN IP address and subnet here
    uci set network.lan.ipaddr='192.168.1.x'
    uci set network.lan.netmask='255.255.255.0'
    uci commit
@@ -316,7 +341,8 @@ need to access it again.
 
 1. Install any other OpenWRT packages you want. At this point, your bridged
    modem probably doesn't have access to the web so download packages to your
-   local computer, SCP them to the modem and install like so:
+   local computer, SCP them to the modem and run the following command on
+   the modem to install them:
 
    ```sh
    opkg install ./package-name-here1.0_brcm63xx.ipk
@@ -332,6 +358,7 @@ need to access it again.
    configuration to workaround redirection in nginx:
 
    ```sh
+   # Run this on your host machine
    IP=192.168.1.x
    HOSTNAME=modem.example.com
    sed "s/10.0.0.138/$IP/g" nginx.template.conf > nginx.conf
