@@ -18,7 +18,7 @@ some or all may not work on your device.
 Instructions are currently written for use on a \*nix-style OS but have
 been successfully also used under Windows as well.  If you're on Windows,
 you can can try with the 
-Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 or simply just do things manually (such as downloading zip files from GitHub
 instead of cloning and running scripts interactive using PuTTY).
 
