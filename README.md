@@ -11,9 +11,9 @@ changes your physical `Status` button, also known as the "easy reset" or
 "info" button to toggle LEDs on/off) and more.
 
 The configuration present may work on other devices, but it is specifically
-geared for the TG799vac.  No guarantees are made that any or all of the code
+geared for the TG799vac. There are no guarantees made that any or all of the code
 will work for you or suit your needs.  Test carefully and be prepared that
-some or all may not work on your device.
+some or all may not work on your device or your firmware.
 
 Instructions are currently written for use on a \*nix-style OS but have
 been successfully also used under Windows as well.  If you're on Windows,
