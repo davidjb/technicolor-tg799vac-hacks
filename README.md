@@ -47,10 +47,11 @@ instead of cloning and running scripts interactive using PuTTY).
    Make sure you do this on your computer/device rather than on your modem.
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
-   tool:
+   tool.  My fork has one fix awaiting a PR into the main repository which
+   is why I'm using that for now:
 
    ```sh
-   git clone https://github.com/mswhirl/autoflashgui.git
+   git clone https://github.com/davidjb/autoflashgui.git
    ```
    
    Again, make sure this is on your computer/device and not your modem.
