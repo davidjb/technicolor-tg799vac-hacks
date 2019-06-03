@@ -555,6 +555,6 @@ MIT, see `LICENCE.txt`
 
 ## TODO
 
-* Disable LED ligtts on Ethernet ports. This looks to be possible via
+* Disable LED lights on Ethernet ports. This looks to be possible via
   `ethswctl -c regaccess ...` but we need to know the right offset and data
   settings.
