@@ -6,19 +6,19 @@ modem. Firstly, we flash the modem and get root, using the publicised methods
 care of [Mark Smith](https://forums.whirlpool.net.au/user/686) online.  Then,
 we access the modem, switch back to more recent firmware, and then tweak that
 firmware to remove backdoors, telemetry, unecessary services, add features
-like SSH, modem UI improvements, disables LEDs so your night stays dark (and
-changes your physical `Status` button, also known as the "easy reset" or
-"info" button to toggle LEDs on/off) and more.
+like SSH, modem UI improvements, disables LEDs so your night stays dark,
+changes your physical `Status` button, also known as the "easy reset" button,
+to toggle LEDs on/off, and more.
 
 The configuration present may work on other devices, but it is specifically
-geared for the TG799vac.  No guarantees are made that any or all of the code
+geared for the TG799vac. There are no guarantees made that any or all of the code
 will work for you or suit your needs.  Test carefully and be prepared that
-some or all may not work on your device.
+some or all may not work on your device or your firmware.
 
 Instructions are currently written for use on a \*nix-style OS but have
 been successfully also used under Windows as well.  If you're on Windows,
 you can can try with the 
-Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 or simply just do things manually (such as downloading zip files from GitHub
 instead of cloning and running scripts interactive using PuTTY).
 
@@ -47,10 +47,11 @@ instead of cloning and running scripts interactive using PuTTY).
    Make sure you do this on your computer/device rather than on your modem.
 
 1. Get the latest version of `autoflashgui`, the firmware flashing and root
-   tool:
+   tool.  My fork has one fix awaiting a PR into the main repository which
+   is why I'm using that for now:
 
    ```sh
-   git clone https://github.com/mswhirl/autoflashgui.git
+   git clone https://github.com/davidjb/autoflashgui.git
    ```
    
    Again, make sure this is on your computer/device and not your modem.
@@ -491,8 +492,8 @@ crash on boot.  Unlikely, but you never know.
 ### VLAN for VDSL2
 
 It's possible to add the VLAN configuration into the UI.  For now, I don't
-need this but I'll consider formalising it later.  Edit this file:
-`/www/docroot/modals/broadband-modal.lp`:
+need this but I'll consider formalising it later.  Edit the file at
+`/www/docroot/modals/broadband-modal.lp` like so:
 
     local lp = require("web.lp")
     lp.setpath("/www/snippets/")
@@ -558,6 +559,6 @@ MIT, see `LICENCE.txt`
 
 ## TODO
 
-* Disable LED ligtts on Ethernet ports. This looks to be possible via
+* Disable LED lights on Ethernet ports. This looks to be possible via
   `ethswctl -c regaccess ...` but we need to know the right offset and data
   settings.
