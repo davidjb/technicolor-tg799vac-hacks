@@ -146,3 +146,23 @@ chmod +x /etc/init.d/leds-off
 # Shut all the LEDs down so this takes effect immediately
 /etc/init.d/leds-off enable
 /etc/init.d/leds-off start
+
+
+###########################################
+# Enable opkg repository feeds from OpenWrt
+#
+# Note that by default, the TG799vac only has 32MB of storage (~25MB free) so if
+# you want to install lots of packages, you should consider an extroot config
+# with a USB stick.
+#
+# See https://openwrt.org/docs/guide-user/additional-software/extroot_configuration
+###########################################
+
+echo -n "
+src/gz chaos_calmer http://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/smp/packages/base
+src/gz luci http://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/smp/packages/luci
+src/gz management http://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/smp/packages/management
+src/gz routing http://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/smp/packages/routing
+src/gz packages http://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/smp/packages/packages
+src/gz telephony http://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/smp/packages/telephony
+" >> /etc/opkg/distfeeds.conf

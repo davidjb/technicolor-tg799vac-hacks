@@ -245,6 +245,10 @@ speed boosts.
    * Adds ability to turn LEDs on or using the physical `Status` button (via
      the newly added `toggleleds.sh` script)
    * Disables *all* LEDs by default (and on boot)
+   * Enables OpenWrt repository feeds for `opkg` (only affects modems with
+     Internet access [not bridged modems] and that there's limited storage
+     space unless you [configure
+     extroot](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration))
 
    You can opt-in or out of any of these changes by just running the bits you
    want or commenting out the bits you don't.
