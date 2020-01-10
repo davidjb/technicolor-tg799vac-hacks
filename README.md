@@ -437,9 +437,11 @@ their stock ticker, SSH key comments and so on) but in my experience, packages
 for the `brcm63xx` architecture all work fine.
 
 The following packages from
-<https://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/generic/packages/packages/>
+<https://archive.openwrt.org/chaos_calmer/15.05.1/brcm63xx/generic/packages/>
 have been confirmed to work on this device:
 
+* `iperf`
+* `iperf3`
 * `openssh-client`
 * `openssh-client-utils`
 * `openssh-keygen`
@@ -457,7 +459,9 @@ access.
 Most other packages for this OpenWrt release/architecture should work, but
 some may conflict with existing packages or files on the device.  There's also
 only 32MB of storage on the modem (24.3MB available on mine) so this is a
-pretty limiting factor in installing extra software.
+pretty limiting factor in installing extra software. You could consider some
+sort of [extroot configuration](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration)
+if you wanted to install larger or more packages.
 
 ### VDSL2 Introspection
 
